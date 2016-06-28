@@ -1,21 +1,31 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        config {
+            keyAlias 'Numista'
+            keyPassword 'numista'
+            storeFile file('E:/Android/NumistaBrowserAS/keystore.jks')
+            storePassword 'numista'
+        }
+    }
     compileSdkVersion 17
     buildToolsVersion "22.0.0"
-
     defaultConfig {
         applicationId "com.numista.browser"
-        minSdkVersion 15
-        targetSdkVersion 19
+        minSdkVersion 17
+        targetSdkVersion 17
         versionCode 1
         versionName "1.0"
+        signingConfig signingConfigs.config
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+    productFlavors {
     }
 }
 

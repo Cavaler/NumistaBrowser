@@ -44,9 +44,16 @@ public class DownloadActivity extends Activity
 		cbDebugging = (CheckBox)findViewById(R.id.cbDebugging);
 
 		SharedPreferences sharedPref = getSharedPreferences("prefs", MODE_PRIVATE);
-		editID.setText(sharedPref.getString("ID", "37918"));
-	}
 
+		if (BuildConfig.DEBUG)
+		{
+			editID.setText(sharedPref.getString("ID", "37918"));
+		}
+		else
+		{
+			cbDebugging.setVisibility(View.GONE);
+		}
+	}
 
 	public void onStart()
 	{
