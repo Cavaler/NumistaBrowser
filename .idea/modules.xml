@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/NumistaBrowserAS.iml" filepath="$PROJECT_DIR$/NumistaBrowserAS.iml" />
+      <module fileurl="file://$PROJECT_DIR$/NumistaBrowser.iml" filepath="$PROJECT_DIR$/NumistaBrowser.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
