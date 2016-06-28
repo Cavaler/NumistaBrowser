@@ -1,0 +1,39 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Coin Name"
+        android:id="@+id/txtCoinName"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Country"
+        android:id="@+id/txtCountry"/>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <ImageView
+            android:layout_width="128dip"
+            android:layout_height="128dip"
+            android:id="@+id/imgObverse"
+            android:minHeight="64dip"/>
+
+        <ImageView
+            android:layout_width="128dip"
+            android:layout_height="128dip"
+            android:id="@+id/imgReverse"
+            android:minHeight="64dip"
+            />
+    </LinearLayout>
+
+</LinearLayout>

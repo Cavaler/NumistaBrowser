@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="app_name">NumistaBrowser</string>
+	<string name="action_filter">Filter</string>
+	<string name="action_download">Download coins</string>
+	<string name="action_settings">Settings</string>
+	<string name="dl_title">Download coins</string>
+	<string name="dl_numista_id">Numista ID:</string>
+    <string name="dl_download">Download</string>
+    <string name="dl_downloading">Downloading...</string>
+    <string name="dl_downloading_of">Downloading (%1$d of %2$d)...</string>
+    <string name="main_country">Country:</string>
+    <string name="main_year">Year:</string>
+    <string name="main_to"> to </string>
+    <string name="main_copy">Copy</string>
+    <string name="main_clear">Clear</string>
+    <string name="main_filter">Filter:</string>
+    <string name="main_inverse">inv</string>
+    <string name="main_all">* All *</string>
+    <string name="toast_no_id">Specify numeric Numista user ID</string>
+    <string name="toast_downloaded">Downloaded %d coin definitions</string>
+    <string name="toast_filtered">Total %d coins found</string>
+    <string name="dl_debugging">DEBUG</string>
+    <string name="title_activity_coin_info">Coin Information</string>
+</resources>
