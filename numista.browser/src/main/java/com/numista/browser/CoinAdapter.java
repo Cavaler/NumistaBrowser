@@ -9,6 +9,7 @@ import android.widget.TextView;
 class CoinAdapter extends BaseExpandableListAdapter
 {
 	private LayoutInflater layoutInflater;
+
 	public CoinAdapter(LayoutInflater inflater)
 	{
 		layoutInflater = inflater;
@@ -39,7 +40,7 @@ class CoinAdapter extends BaseExpandableListAdapter
 		if (convertView == null)
 			convertView = layoutInflater.inflate(R.layout.group_item, null);
 
-		TextView text = (TextView)convertView.findViewById(R.id.txtCoinName);
+		TextView text = (TextView) convertView.findViewById(R.id.txtCoinName);
 		text.setText(Data.CoinsList.get(groupPosition).TextView());
 
 		return convertView;
@@ -65,7 +66,7 @@ class CoinAdapter extends BaseExpandableListAdapter
 		if (convertView == null)
 			convertView = layoutInflater.inflate(R.layout.child_item, null);
 
-		TextView text = (TextView)convertView.findViewById(R.id.txtYear);
+		TextView text = (TextView) convertView.findViewById(R.id.txtYear);
 		text.setText(Data.CoinsList.get(groupPosition).years.get(childPosition).TextView());
 
 		return convertView;

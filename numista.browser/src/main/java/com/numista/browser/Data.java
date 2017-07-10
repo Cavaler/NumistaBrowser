@@ -65,6 +65,7 @@ public final class Data
 			visual_name = name;
 			coin_count = count;
 		}
+
 		Country(int count)
 		{
 			country_name = "";
@@ -116,7 +117,8 @@ public final class Data
 			try
 			{
 				return Integer.parseInt(year);
-			} catch (NumberFormatException e)
+			}
+			catch (NumberFormatException e)
 			{
 			}
 

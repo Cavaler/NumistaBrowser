@@ -27,18 +27,18 @@ public final class Database
 		public static final String COLUMN_ORDER = "corder";
 
 		public static final String SQL_CREATE = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + " ("
-			+ COLUMN_ID + " INTEGER PRIMARY KEY, "
-			+ COLUMN_NAME + " TEXT, "
-			+ COLUMN_COUNTRY_NAME + " TEXT, "
-			+ COLUMN_OBVERSE + " TEXT, "
-			+ COLUMN_REVERSE + " TEXT, "
-			+ COLUMN_KM + " TEXT, "
-			+ COLUMN_ORDER + " INTEGER "
-			+ ")";
+				+ COLUMN_ID + " INTEGER PRIMARY KEY, "
+				+ COLUMN_NAME + " TEXT, "
+				+ COLUMN_COUNTRY_NAME + " TEXT, "
+				+ COLUMN_OBVERSE + " TEXT, "
+				+ COLUMN_REVERSE + " TEXT, "
+				+ COLUMN_KM + " TEXT, "
+				+ COLUMN_ORDER + " INTEGER "
+				+ ")";
 		public static final String SQL_INSERT = "INSERT INTO " + TABLE_NAME + " VALUES (?, ?, ?, ?, ?, ?, ?)";
 		public static final String SQL_SELECT = "SELECT * FROM " + TABLE_NAME + " ORDER BY " + COLUMN_ORDER + " ASC";
 		public static final String SQL_DROP = "DROP TABLE IF EXISTS " + TABLE_NAME;
-	};
+	}
 
 	public static class Years
 	{
@@ -53,20 +53,20 @@ public final class Database
 		public static final String COLUMN_EXCH = "exch";
 
 		public static final String SQL_CREATE = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + " ("
-			+ COLUMN_ID + " INTEGER, "
-			+ COLUMN_YEAR + " TEXT, "
-			+ COLUMN_VG + " INTEGER, "
-			+ COLUMN_F + " INTEGER, "
-			+ COLUMN_VF + " INTEGER, "
-			+ COLUMN_XF + " INTEGER, "
-			+ COLUMN_UNC + " INTEGER, "
-			+ COLUMN_EXCH + " INTEGER "
-			+ ")";
+				+ COLUMN_ID + " INTEGER, "
+				+ COLUMN_YEAR + " TEXT, "
+				+ COLUMN_VG + " INTEGER, "
+				+ COLUMN_F + " INTEGER, "
+				+ COLUMN_VF + " INTEGER, "
+				+ COLUMN_XF + " INTEGER, "
+				+ COLUMN_UNC + " INTEGER, "
+				+ COLUMN_EXCH + " INTEGER "
+				+ ")";
 		public static final String SQL_INSERT = "INSERT INTO " + TABLE_NAME + " VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 		public static final String SQL_SELECT = "SELECT * FROM " + TABLE_NAME + " WHERE " + COLUMN_ID + "=%d";
 		public static final String SQL_SELECT_ALL = "SELECT * FROM " + TABLE_NAME;
 		public static final String SQL_DROP = "DROP TABLE IF EXISTS " + TABLE_NAME;
-	};
+	}
 
 	public static int DATABASE_VERSION = 3;
 	public static String DATABASE_NAME = "coins.db";
@@ -93,7 +93,7 @@ public final class Database
 
 			onCreate(db);
 		}
-	};
+	}
 
 	public static void LoadDatabase(Context ctx)
 	{
@@ -212,4 +212,4 @@ public final class Database
 
 		DbHelper.close();
 	}
-};
+}

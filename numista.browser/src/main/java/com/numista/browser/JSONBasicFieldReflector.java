@@ -29,7 +29,8 @@ public class JSONBasicFieldReflector
 				try
 				{
 					field.setInt(this, json.optInt(field.getName(), field.getInt(this)));
-				} catch (IllegalAccessException e) {}
+				}
+				catch (IllegalAccessException e) {}
 			}
 			else if (tn.equals("java.lang.String"))
 			{
@@ -37,7 +38,8 @@ public class JSONBasicFieldReflector
 				{
 					Object v = field.get(this);
 					field.set(this, json.optString(field.getName(), (v != null) ? v.toString() : ""));
-				} catch (IllegalAccessException e) {}
+				}
+				catch (IllegalAccessException e) {}
 			}
 			else
 			{
@@ -46,7 +48,8 @@ public class JSONBasicFieldReflector
 					Constructor constr = cf.getDeclaredConstructor(JSONObject.class);
 					Object inst = constr.newInstance(json.optJSONObject(field.getName()));
 					field.set(this, inst);
-				} catch (Exception e)
+				}
+				catch (Exception e)
 				{
 					String msg = e.getMessage();
 				}
@@ -82,7 +85,8 @@ public class JSONBasicFieldReflector
 			}
 
 			getClass().getField(field).set(this, list);
-		} catch (Exception e)
+		}
+		catch (Exception e)
 		{
 			String msg = e.getMessage();
 		}

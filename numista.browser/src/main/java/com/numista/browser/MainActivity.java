@@ -49,7 +49,7 @@ public class MainActivity
 		editFilter = (EditText) findViewById(R.id.editFilter);
 		cbInverse = (CheckBox) findViewById(R.id.cbInverse);
 		listItems = (ExpandableListView) findViewById(R.id.listItems);
-		layoutFilter = (LinearLayout)findViewById(R.id.filterLayout);
+		layoutFilter = (LinearLayout) findViewById(R.id.filterLayout);
 
 		spinCountry.setOnItemSelectedListener(this);
 		editYearFrom.setOnEditorActionListener(this);
@@ -67,8 +67,8 @@ public class MainActivity
 
 		ImageLoader.getInstance().init(config);
 
-        Database.LoadDatabase(this);
-        RebuildCountryList();
+		Database.LoadDatabase(this);
+		RebuildCountryList();
 		RebuildList();
 
 		layoutFilter.setVisibility(View.GONE);
@@ -94,7 +94,7 @@ public class MainActivity
 				View focus = getCurrentFocus();
 				if (focus != null)
 				{
-					InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+					InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 					imm.hideSoftInputFromWindow(focus.getWindowToken(), InputMethodManager.RESULT_UNCHANGED_SHOWN);
 				}
 			}
@@ -129,6 +129,7 @@ public class MainActivity
 	}
 
 	private String CurrentCountry = "";
+
 	private void RebuildList()
 	{
 		String strYearFrom = editYearFrom.getText().toString();
@@ -141,12 +142,14 @@ public class MainActivity
 		try
 		{
 			nYearFrom = Integer.parseInt(strYearFrom);
-		} catch (NumberFormatException e) {}
+		}
+		catch (NumberFormatException e) {}
 
 		try
 		{
 			nYearTo = Integer.parseInt(strYearTo);
-		} catch (NumberFormatException e) {}
+		}
+		catch (NumberFormatException e) {}
 
 		Data.FilterList(CurrentCountry, strFilter, bInverse, nYearFrom, nYearTo);
 
@@ -160,7 +163,7 @@ public class MainActivity
 	{
 		if (adapterView == spinCountry)
 		{
-			Data.Country country = (Data.Country)spinCountry.getItemAtPosition(i);
+			Data.Country country = (Data.Country) spinCountry.getItemAtPosition(i);
 			CurrentCountry = country.country_name;
 			RebuildList();
 		}
@@ -180,7 +183,7 @@ public class MainActivity
 	{
 		RebuildList();
 
-		InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+		InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 		imm.hideSoftInputFromWindow(textView.getWindowToken(), InputMethodManager.RESULT_UNCHANGED_SHOWN);
 
 		return false;

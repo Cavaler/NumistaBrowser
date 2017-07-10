@@ -28,10 +28,10 @@ public class CoinInfoActivity extends Activity
 		int index = getIntent().getIntExtra("Coin", 0);
 		coin = Data.CoinsList.get(index);
 
-		txtCoinName = (TextView)findViewById(R.id.txtCoinName);
-		txtCountryName = (TextView)findViewById(R.id.txtCountry);
-		imgObverse = (ImageView)findViewById(R.id.imgObverse);
-		imgReverse = (ImageView)findViewById(R.id.imgReverse);
+		txtCoinName = (TextView) findViewById(R.id.txtCoinName);
+		txtCountryName = (TextView) findViewById(R.id.txtCountry);
+		imgObverse = (ImageView) findViewById(R.id.imgObverse);
+		imgReverse = (ImageView) findViewById(R.id.imgReverse);
 
 		txtCoinName.setText(coin.name);
 		txtCountryName.setText(coin.country_name);

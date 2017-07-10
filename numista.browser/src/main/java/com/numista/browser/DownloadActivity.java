@@ -39,11 +39,11 @@ public class DownloadActivity extends Activity
 
 		setContentView(R.layout.activity_download);
 
-		editID = (EditText)findViewById(R.id.editNumistaID);
-		btnDownload = (Button)findViewById(R.id.btnDownload);
-		btnCancel = (Button)findViewById(R.id.btnCancel);
-		progressBar = (ProgressBar)findViewById(R.id.barProgress);
-		cbDebugging = (CheckBox)findViewById(R.id.cbDebugging);
+		editID = (EditText) findViewById(R.id.editNumistaID);
+		btnDownload = (Button) findViewById(R.id.btnDownload);
+		btnCancel = (Button) findViewById(R.id.btnCancel);
+		progressBar = (ProgressBar) findViewById(R.id.barProgress);
+		cbDebugging = (CheckBox) findViewById(R.id.cbDebugging);
 
 		SharedPreferences sharedPref = getSharedPreferences("prefs", MODE_PRIVATE);
 
@@ -110,7 +110,8 @@ public class DownloadActivity extends Activity
 		try
 		{
 			ID = Integer.parseInt(editID.getText().toString());
-		} catch(NumberFormatException e)
+		}
+		catch (NumberFormatException e)
 		{
 			Toast.makeText(getApplicationContext(), getString(R.string.toast_no_id), Toast.LENGTH_SHORT).show();
 			return;
@@ -136,22 +137,31 @@ public class DownloadActivity extends Activity
 		protected void onPostExecute(Boolean result)
 		{
 			super.onPostExecute(result);
-			runOnUiThread(new Runnable() {
+			runOnUiThread(new Runnable()
+			{
 				@Override
-				public void run() { OnJsonReceived(); }
+				public void run()
+				{
+					OnJsonReceived();
+				}
 			});
 		}
 
 		@Override
 		protected void onCancelled()
 		{
-			runOnUiThread(new Runnable() {
+			runOnUiThread(new Runnable()
+			{
 				@Override
-				public void run() { OnCancelled(); }
+				public void run()
+				{
+					OnCancelled();
+				}
 			});
 			super.onCancelled();
 		}
 	}
+
 	DownloadTask task;
 
 	public boolean RetrieveJson(int ID, int page, boolean debug)
@@ -168,7 +178,8 @@ public class DownloadActivity extends Activity
 		try
 		{
 			url = new URL(strURL);
-		} catch (MalformedURLException e)
+		}
+		catch (MalformedURLException e)
 		{
 			return false;
 		}
@@ -185,7 +196,8 @@ public class DownloadActivity extends Activity
 			{
 				result.append(line);
 			}
-		} catch (IOException e)
+		}
+		catch (IOException e)
 		{
 			return false;
 		}
@@ -194,7 +206,8 @@ public class DownloadActivity extends Activity
 		try
 		{
 			json = new JSONObject(result.toString());
-		} catch (JSONException e)
+		}
+		catch (JSONException e)
 		{
 			return false;
 		}
