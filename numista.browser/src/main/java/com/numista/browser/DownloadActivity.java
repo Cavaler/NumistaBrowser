@@ -25,6 +25,7 @@ public class DownloadActivity extends Activity
 {
 	EditText editID;
 	Button btnDownload;
+	Button btnCancel;
 	ProgressBar progressBar;
 	CheckBox cbDebugging;
 
@@ -40,6 +41,7 @@ public class DownloadActivity extends Activity
 
 		editID = (EditText)findViewById(R.id.editNumistaID);
 		btnDownload = (Button)findViewById(R.id.btnDownload);
+		btnCancel = (Button)findViewById(R.id.btnCancel);
 		progressBar = (ProgressBar)findViewById(R.id.barProgress);
 		cbDebugging = (CheckBox)findViewById(R.id.cbDebugging);
 
@@ -66,25 +68,38 @@ public class DownloadActivity extends Activity
 	{
 		isRunning = false;
 
+		SaveID();
+
+		super.onStop();
+	}
+
+	void SaveID()
+	{
 		SharedPreferences sharedPref = getSharedPreferences("prefs", MODE_PRIVATE);
 		SharedPreferences.Editor edit = sharedPref.edit();
 
 		edit.putString("ID", editID.getText().toString());
 		edit.commit();
-
-		super.onStop();
 	}
 
 	public void onDownloadClick(View view)
 	{
 		Data.Coins.clear();
 
+		SaveID();
+
 		editID.setEnabled(false);
 		btnDownload.setEnabled(false);
 		btnDownload.setText(getString(R.string.dl_downloading));
+		btnCancel.setEnabled(true);
 
 		Database.ClearDatabase(this);
 		StartRetrieveJson(1);
+	}
+
+	public void onCancelClick(View view)
+	{
+		task.cancel(true);
 	}
 
 	public void StartRetrieveJson(int page)
@@ -125,6 +140,16 @@ public class DownloadActivity extends Activity
 				@Override
 				public void run() { OnJsonReceived(); }
 			});
+		}
+
+		@Override
+		protected void onCancelled()
+		{
+			runOnUiThread(new Runnable() {
+				@Override
+				public void run() { OnCancelled(); }
+			});
+			super.onCancelled();
 		}
 	}
 	DownloadTask task;
@@ -202,5 +227,15 @@ public class DownloadActivity extends Activity
 			setResult(RESULT_OK, null);
 			finish();
 		}
+	}
+
+	public void OnCancelled()
+	{
+		if (!isRunning) return;
+
+		editID.setEnabled(true);
+		btnDownload.setEnabled(true);
+		btnDownload.setText(getString(R.string.dl_download));
+		btnCancel.setEnabled(false);
 	}
 }

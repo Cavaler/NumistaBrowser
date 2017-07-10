@@ -41,4 +41,13 @@
         android:layout_height="wrap_content"
         android:id="@+id/btnDownload"
         android:onClick="onDownloadClick" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/dl_cancel"
+        android:id="@+id/btnCancel"
+        android:layout_gravity="center_horizontal"
+        android:enabled="false"
+        android:onClick="onCancelClick" />
 </LinearLayout>

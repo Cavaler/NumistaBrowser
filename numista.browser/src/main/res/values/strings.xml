@@ -22,4 +22,5 @@
     <string name="toast_filtered">Total %d coins found</string>
     <string name="dl_debugging">DEBUG</string>
     <string name="title_activity_coin_info">Coin Information</string>
+    <string name="dl_cancel">Cancel</string>
 </resources>
