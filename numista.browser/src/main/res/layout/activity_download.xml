@@ -29,11 +29,12 @@
             android:layout_weight="1" />
     </LinearLayout>
 
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/dl_debugging"
-        android:id="@+id/cbDebugging"/>
+	<CheckBox
+		android:id="@+id/cbDebugging"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:onClick="onDebugClick"
+		android:text="@string/dl_debugging"/>
 
     <Button
         android:text="@string/dl_download"

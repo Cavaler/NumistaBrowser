@@ -1,9 +1,12 @@
 package com.numista.browser;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -31,6 +34,7 @@ public class DownloadActivity extends Activity
 
 	boolean isRunning = false;
 	Data.Response lastResponse = null;
+	int nextPage = 1;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -45,6 +49,18 @@ public class DownloadActivity extends Activity
 		progressBar = (ProgressBar) findViewById(R.id.barProgress);
 		cbDebugging = (CheckBox) findViewById(R.id.cbDebugging);
 
+		editID.addTextChangedListener(new TextWatcher() {
+			public void afterTextChanged(Editable s) {}
+			public void beforeTextChanged(CharSequence s, int start,
+			                              int count, int after) {}
+
+			public void onTextChanged(CharSequence s, int start,
+			                          int before, int count) {
+				nextPage = 1;
+				btnDownload.setText(getString(R.string.dl_download));
+			}
+		});
+
 		SharedPreferences sharedPref = getSharedPreferences("prefs", MODE_PRIVATE);
 
 		if (BuildConfig.DEBUG)
@@ -55,6 +71,12 @@ public class DownloadActivity extends Activity
 		{
 			cbDebugging.setVisibility(View.GONE);
 		}
+	}
+
+	public void onDebugClick(View view)
+	{
+		nextPage = 1;
+		btnDownload.setText(getString(R.string.dl_download));
 	}
 
 	public void onStart()
@@ -84,8 +106,6 @@ public class DownloadActivity extends Activity
 
 	public void onDownloadClick(View view)
 	{
-		Data.Coins.clear();
-
 		SaveID();
 
 		editID.setEnabled(false);
@@ -93,8 +113,14 @@ public class DownloadActivity extends Activity
 		btnDownload.setText(getString(R.string.dl_downloading));
 		btnCancel.setEnabled(true);
 
-		Database.ClearDatabase(this);
-		StartRetrieveJson(1);
+		if (nextPage <= 1)
+		{
+			Data.Coins.clear();
+			Database.ClearDatabase(this);
+			nextPage = 1;
+		}
+
+		StartRetrieveJson(nextPage);
 	}
 
 	public void onCancelClick(View view)
@@ -105,6 +131,7 @@ public class DownloadActivity extends Activity
 	public void StartRetrieveJson(int page)
 	{
 		lastResponse = null;
+		nextPage = page;
 
 		int ID;
 		try
@@ -121,10 +148,10 @@ public class DownloadActivity extends Activity
 		task.execute(ID, page, cbDebugging.isChecked() ? 1 : 0);
 	}
 
-	class DownloadTask extends AsyncTask<Integer, Void, Boolean>
+	class DownloadTask extends AsyncTask<Integer, Void, String>
 	{
 		@Override
-		protected Boolean doInBackground(Integer... params)
+		protected String doInBackground(Integer... params)
 		{
 			int ID = params[0];
 			int page = params[1];
@@ -134,7 +161,7 @@ public class DownloadActivity extends Activity
 		}
 
 		@Override
-		protected void onPostExecute(Boolean result)
+		protected void onPostExecute(final String result)
 		{
 			super.onPostExecute(result);
 			runOnUiThread(new Runnable()
@@ -142,7 +169,7 @@ public class DownloadActivity extends Activity
 				@Override
 				public void run()
 				{
-					OnJsonReceived();
+					if (lastResponse != null) OnJsonReceived(); else OnReceiveError(result);
 				}
 			});
 		}
@@ -164,7 +191,7 @@ public class DownloadActivity extends Activity
 
 	DownloadTask task;
 
-	public boolean RetrieveJson(int ID, int page, boolean debug)
+	public String RetrieveJson(int ID, int page, boolean debug)
 	{
 		lastResponse = null;
 
@@ -181,25 +208,38 @@ public class DownloadActivity extends Activity
 		}
 		catch (MalformedURLException e)
 		{
-			return false;
+			return e.getMessage();
 		}
 
 		StringBuilder result = new StringBuilder();
 		try
 		{
 			HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-			InputStreamReader reader = new InputStreamReader(urlConnection.getInputStream());
-			BufferedReader buffer = new BufferedReader(reader);
-
-			String line;
-			while ((line = buffer.readLine()) != null)
+			urlConnection.setConnectTimeout(5000);
+			urlConnection.setReadTimeout(10000);
+			try
 			{
-				result.append(line);
+				InputStreamReader reader = new InputStreamReader(urlConnection.getInputStream());
+				BufferedReader buffer = new BufferedReader(reader);
+
+				String line;
+				while ((line = buffer.readLine()) != null)
+				{
+					result.append(line);
+				}
 			}
+			finally
+			{
+				urlConnection.disconnect();
+			}
+		}
+		catch (java.net.SocketTimeoutException e)
+		{
+			return e.getMessage();
 		}
 		catch (IOException e)
 		{
-			return false;
+			return e.getMessage();
 		}
 
 		JSONObject json;
@@ -209,12 +249,12 @@ public class DownloadActivity extends Activity
 		}
 		catch (JSONException e)
 		{
-			return false;
+			return e.getMessage();
 		}
 
 		lastResponse = new Data.Response(json);
 
-		return true;
+		return "";
 	}
 
 	public void OnJsonReceived()
@@ -242,13 +282,26 @@ public class DownloadActivity extends Activity
 		}
 	}
 
+	public void OnReceiveError(String result)
+	{
+		OnCancelled();
+
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle("Error");
+		builder.setMessage(result);
+		builder.setPositiveButton("OK", null);
+
+		AlertDialog dialog = builder.create();
+		dialog.show();
+	}
+
 	public void OnCancelled()
 	{
 		if (!isRunning) return;
 
 		editID.setEnabled(true);
 		btnDownload.setEnabled(true);
-		btnDownload.setText(getString(R.string.dl_download));
+		btnDownload.setText(getString(nextPage <= 1 ? R.string.dl_download : R.string.dl_continue));
 		btnCancel.setEnabled(false);
 	}
 }
