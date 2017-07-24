@@ -38,7 +38,7 @@ public final class Data
 		public String TextView()
 		{
 			if (Data.CountrySelected)
-				return name;
+				return (km != "") ? name + " (" + km + ")" : name;
 			else
 				return country_name + " => " + name;
 		}

@@ -2,33 +2,50 @@
               android:orientation="vertical"
               android:layout_width="fill_parent"
               android:layout_height="fill_parent">
-    <TextView
+
+	<TextView
+		android:id="@+id/txtCountry"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:text="Country"
+		android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+	<TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Coin Name"
         android:id="@+id/txtCoinName"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Country"
-        android:id="@+id/txtCountry"/>
+	<TextView
+		android:id="@+id/txtKM"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:text="KM #"
+		android:textAppearance="?android:attr/textAppearanceLarge"/>
 
-    <LinearLayout
+	<Space
+		android:layout_width="match_parent"
+		android:layout_height="10dp"/>
+
+	<LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
 
-        <ImageView
+		<ImageView
             android:layout_width="128dip"
             android:layout_height="128dip"
             android:id="@+id/imgObverse"
             android:minHeight="64dip"/>
 
-        <ImageView
+		<Space
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"/>
+
+		<ImageView
             android:layout_width="128dip"
             android:layout_height="128dip"
             android:id="@+id/imgReverse"

@@ -14,8 +14,9 @@ public class CoinInfoActivity extends Activity
 {
 	Data.Entry coin;
 
-	TextView txtCoinName;
 	TextView txtCountryName;
+	TextView txtCoinName;
+	TextView txtKM;
 	ImageView imgObverse;
 	ImageView imgReverse;
 
@@ -28,13 +29,15 @@ public class CoinInfoActivity extends Activity
 		int index = getIntent().getIntExtra("Coin", 0);
 		coin = Data.CoinsList.get(index);
 
-		txtCoinName = (TextView) findViewById(R.id.txtCoinName);
 		txtCountryName = (TextView) findViewById(R.id.txtCountry);
+		txtCoinName = (TextView) findViewById(R.id.txtCoinName);
+		txtKM = (TextView) findViewById(R.id.txtKM);
 		imgObverse = (ImageView) findViewById(R.id.imgObverse);
 		imgReverse = (ImageView) findViewById(R.id.imgReverse);
 
-		txtCoinName.setText(coin.name);
 		txtCountryName.setText(coin.country_name);
+		txtCoinName.setText(coin.name);
+		txtKM.setText(coin.km);
 
 		ImageLoader imageLoader = ImageLoader.getInstance();
 		imageLoader.displayImage(coin.obverse, imgObverse);
