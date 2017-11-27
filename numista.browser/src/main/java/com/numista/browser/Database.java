@@ -35,7 +35,7 @@ public final class Database
 				+ COLUMN_KM + " TEXT, "
 				+ COLUMN_ORDER + " INTEGER "
 				+ ")";
-		public static final String SQL_INSERT = "INSERT INTO " + TABLE_NAME + " VALUES (?, ?, ?, ?, ?, ?, ?)";
+		public static final String SQL_INSERT = "INSERT OR REPLACE INTO " + TABLE_NAME + " VALUES (?, ?, ?, ?, ?, ?, ?)";
 		public static final String SQL_SELECT = "SELECT * FROM " + TABLE_NAME + " ORDER BY " + COLUMN_ORDER + " ASC";
 		public static final String SQL_DROP = "DROP TABLE IF EXISTS " + TABLE_NAME;
 	}
@@ -62,7 +62,7 @@ public final class Database
 				+ COLUMN_UNC + " INTEGER, "
 				+ COLUMN_EXCH + " INTEGER "
 				+ ")";
-		public static final String SQL_INSERT = "INSERT INTO " + TABLE_NAME + " VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+		public static final String SQL_INSERT = "INSERT OR REPLACE INTO " + TABLE_NAME + " VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 		public static final String SQL_SELECT = "SELECT * FROM " + TABLE_NAME + " WHERE " + COLUMN_ID + "=%d";
 		public static final String SQL_SELECT_ALL = "SELECT * FROM " + TABLE_NAME;
 		public static final String SQL_DROP = "DROP TABLE IF EXISTS " + TABLE_NAME;
